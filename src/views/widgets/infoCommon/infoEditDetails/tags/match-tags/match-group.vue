@@ -1,0 +1,132 @@
+<template>
+  <sn-select
+    v-model="value"
+    :name="name"
+    width="143"
+    ref="scheduleSelect"
+    placeholder="请选择小组"
+    @getList="getScheduleList"
+    @change="scheduleSelectChange"
+    :disabled="!ancestor.matchRoundVal"
+    async
+  >
+    <template v-if="!duringAjax&&scheduleSuggestions.length!==0">
+      <sn-option value="" name="请选择"></sn-option>
+      <sn-option
+        v-for="item in scheduleSuggestions"
+        :key="item.groupId"
+        :name="item.groupName"
+        :value="''+item.groupId"
+        :disabled="item.disabled">
+      </sn-option>
+    </template>
+    <div class="text-center">
+      <template v-if="duringAjax">数据加载中。。。</template>
+      <template v-else-if="scheduleSuggestions.length==0">暂无数据</template>
+    </div>
+  </sn-select>
+</template>
+
+<script>
+import _ from 'lodash'
+import DI from 'interface'
+import emitter from 'mixins/emitter'
+import * as Constant from 'js/constant'
+export default {
+  mixins: [emitter],
+  name: 'MatchGroupTag',
+  componentName: 'MatchGroupTag',
+  props: {
+    value: [String, Number],
+    name: String
+  },
+  data() {
+    return {
+      scheduleSuggestions: [],
+      duringAjax: false,
+      ancestor: this.$parent.$parent
+    }
+  },
+  created () {
+    this.$on('clearSelfSelectedState', this.clear);
+  },
+  methods: {
+    clear () {
+      this.scheduleSuggestions = [];
+      this.$emit('input', '');
+    },
+    scheduleSelectChange(val) {
+      const oldVal = this.value;
+
+      this.$emit('input', val);
+      this.dispatch('MatchTag', 'changeLabelsContainer', [this.getSelectedItemById(val), 'MatchGroupTag']);
+
+      /* this.$nextTick(() => {
+        this.$bus.$emit('refreshSettleTeamList', {
+          newList: this.getTeamListFromItem(val),
+          oldList: this.getTeamListFromItem(oldVal)
+        })
+      }) */
+    },
+    getScheduleList() {
+      const { sportsTypeVal, matchTypeVal, matchSeasonVal, matchRoundVal} = this.ancestor;
+
+      if (this.scheduleSuggestions.length == 0) {
+        if (!matchRoundVal) {
+          this.$message.warning('请选择阶段！');
+          return ;
+        }
+
+        let ajaxData = {
+          stageId: matchRoundVal
+        };
+        this.duringAjax = true;
+        this.$ajax({
+          url: DI.infoLibrary.getGroupList,
+          type: 'get',
+          data: ajaxData,
+          context: this,
+          success: (res) => {
+            this.duringAjax = false;
+            if (res.retCode == "0") {
+              const data = res.data || {};
+              this.scheduleSuggestions = data.list || [];
+            } else {
+              this.$message.error(res.retMsg);
+            }
+          },
+          error: () => {
+            console.log("error");
+          }
+        });
+      }
+
+    },
+    getSelectedItemById(val) {
+      return this.scheduleSuggestions.find((schedule) => {
+        return  val === '' + schedule.groupId
+      })
+    },
+    getTeamListFromItem(val) {
+      let item = this.getSelectedItemById(val);
+
+      if (item == null) {
+        return []
+      }
+
+      return [
+        {
+          teamId: '' + item.homeTeamId,
+          teamName: item.homeTeamName,
+          teamLogo: item.homeTeamLogo
+        },
+        {
+          teamId: '' + item.guestTeamId,
+          teamName: item.guestTeamName,
+          teamLogo: item.guestTeamLogo
+        }
+      ]
+    }
+  }
+}
+</script>

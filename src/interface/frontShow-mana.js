@@ -1,0 +1,29 @@
+export default {
+  //底部导航配置模块
+  floorTab:{
+    queryList:'/adminMgt/bottomNavigation/query.do',//查询
+    edit:'/adminMgt/bottomNavigation/edit.do',//编辑
+    move:'/adminMgt/bottomNavigation/move.do'//上下移
+  },
+  //A面频道管理模块 B面配置模块 PC端展示配置模块
+  channelConfig:{
+    queryList:'/adminMgt/newChannel/querylist.do',//查询
+    save:'/adminMgt/newChannel/save.do',//保存
+    move:'/adminMgt/newChannel/exchangeChannel.do',//上下移
+    setMark:'/adminMgt/newChannel/markSet.do',//设置角标
+    changeTop:'/adminMgt/newChannel/stickySet.do',//置顶与取消置顶
+    delChannel:'/adminMgt/newChannel/delete.do',//删除
+    edit:'/adminMgt/newChannel/edit.do',//编辑
+    queryThemeInfoById:'/adminMgt/newChannel/querySubject.do',//查询主题信息
+    switchConfiguration:'/adminMgt/newChannel/switchConfiguration.do',//开关配置
+    logoConfiguration:'/adminMgt/newChannel/logoConfiguration.do',//入口配置
+    querySwitch:'/adminMgt/newChannel/querySwitch.do',//查询B面开关
+    queryLogoConfig:'/adminMgt/newChannel/queryLogoConfig.do',//查询B面出入图
+    querySportsTypeList:'/adminMgt/querySportsTypeList.do'//查询运动列表
+  },
+  //搜索栏展示配置模块
+  searchBarConfig:{
+    queryList:'/adminMgt/searchBar/queryList.do',//查询
+    save:'/adminMgt/searchBar/update.do',//保存
+  }
+};

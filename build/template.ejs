@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+  <!-- HTTP 1.1 -->
+  <meta http-equiv="pragma" content="no-cache">
+  <!-- HTTP 1.0 -->
+  <meta http-equiv="cache-control" content="no-cache">
+  <!-- Prevent caching at the proxy server -->
+  <meta http-equiv="expires" content="0">
+  <link rel="stylesheet" href="static/jquery-ui/jquery-ui.min.css">
+  <link rel="stylesheet" href="static/jquery-ui/jquery-ui-timepicker-addon.css">
+  <!--该页面所依赖的其它剩下的 CSS 注入的地方-->
+  <!--STYLE-->
+
+</head>
+
+<body>
+  <div id="idx"></div>
+
+  <script src="static/jquery.min.js"></script>
+  <!-- 日历需要增加start -->
+  <script src="static/upload.min.js"></script>
+  <script src="static/jquery-ui/jquery-ui.min.js"></script>
+  <script src="static/jquery-ui/jquery-ui-timepicker-addon.js"></script>
+  <!-- 日历需要增加end -->
+  <!-- passport start -->
+  <script>
+    var passport_config = {
+      base: "/snsis-admin-web/",
+      loginTheme: "wap_new"
+    };
+  </script>
+  <script src="https://sso.cnsuning.com/ids/js/passport.js "></script>
+  <!-- <script src="http://player.aplus.pptv.com/jsplayer/pid/5701.js"></script> -->
+  <script src="http://player.aplus.pptv.com/jsplayer/pid/4749040.js?v=1.0.0"></script>
+  <script src="static/dll/<%= dllName%>.js"></script>
+  <script src="manifest"></script>
+  <!--该页面所依赖的其它剩下的 JavaScript 注入的地方-->
+  <!--SCRIPT-->
+</body>
+
+</html>

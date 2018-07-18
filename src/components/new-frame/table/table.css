@@ -1,0 +1,118 @@
+.tn-table {
+  width: 100%;
+  height: 100%;
+  max-width: 100%;
+  position: relative;
+  color: #657180;
+  font-size: 12px;
+  background-color: #fff;
+  box-sizing: border-box;
+  .tn-table-hide {
+    opacity: 0;
+  }
+  &:before {
+    content: '';
+    width: 100%;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    background-color: #d7dde4;
+    z-index: 1;
+  }
+  &:after {
+    content: '';
+    height: 100%;
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: #d7dde4;
+    z-index: 3;
+  }
+  table {
+    border: 0;
+    margin: 0;
+    border-collapse: collapse;
+    border-spacing: 0
+  }
+  th,
+  td {
+    min-width: 0;
+    height: 100px;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-align: left;
+    text-overflow: ellipsis;
+    vertical-align: middle;
+    position: relative;
+    border-bottom: 1px solid #d7dde4;
+  }
+  tr {
+    background-color: #fff;
+  }
+  th {
+    height: 50px;
+    white-space: nowrap;
+    overflow: hidden;
+    background-color: #ebebeb;
+    font-weight: bold;
+  }
+  td {
+    padding: 8px 0;
+    transition: background-color .2s ease-in-out;
+    &.is-border:not(:last-child) {
+      .tn-table__cell {
+        border-right: 1px solid #f0f1f5;
+      }
+    }
+  }
+  .tn-table__header {
+    width: 100%;
+    overflow: hidden;
+  }
+  .tn-table__body {
+    width: 100%;
+  }
+  .tn-table__cell {
+    height: 100%;
+    display: flex;
+    max-width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    word-break: break-all;
+    box-sizing: border-box;
+  }
+  .tn-table--striped {
+    tr:nth-child(even) {
+      td {
+        background-color: #f5f7f9;
+      }
+    }
+    ;
+  }
+  .tn-table-loading__container {
+    text-align: center;
+    padding: 10px 0;
+    i {
+      font-size: 24px;
+    }
+  }
+  .tn-table__empty {
+    text-align: center;
+    padding: 120px 0;
+    .tn-table__empty--img {
+      height: 130px;
+      background-image: url(../../../assets/icon-blank01.png);
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: 11% 130%;
+    }
+    .tn-table__empty--text {
+      color: #54565F;
+      font-size: 16px;
+    }
+  }
+}
